@@ -4,10 +4,21 @@ import java.util.Scanner;
 
 public class Main {
 	public String solution(String str) {
-		String answer = "";
-		for( int i = 0; i < str.length(); i++ ) {
-			if(str.indexOf(str.charAt(i))==i) answer+=str.charAt(i);
+		String answer = "YES";
+		str = str.toUpperCase();
+		char[] ch = str.toCharArray();
+		int lt = 0, rt = str.length()-1; 
+		while(lt<rt) {
+			if(ch[lt] == ch [rt]) {
+				lt++;
+				rt--; 
+			}else {
+				answer = "NO"; 
+				break; 
+			}
 		}
+		
+		
 		return answer; 
 	}
 	
