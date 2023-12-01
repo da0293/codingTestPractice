@@ -5,20 +5,9 @@ import java.util.Scanner;
 public class Main {
 	public String solution(String str) {
 		String answer = "";
-		char[] ch = str.toCharArray();
-		int lt = 0; int rt = str.length()-1;
-		while(lt<rt) {
-			if(!Character.isAlphabetic(ch[lt]))lt++;
-			else if (!Character.isAlphabetic(ch[rt]))rt--;
-			else {
-				char temp = ch[lt]; 
-				ch[lt] = ch[rt]; 
-				ch[rt] = temp;
-				lt++; 
-				rt--;  
-			}
+		for( int i = 0; i < str.length(); i++ ) {
+			if(str.indexOf(str.charAt(i))==i) answer+=str.charAt(i);
 		}
-		answer = String.valueOf(ch);
 		return answer; 
 	}
 	
