@@ -1,8 +1,6 @@
 package practice;
 
 import java.util.Scanner;
-
-
 public class Main {
 	public int[] solution(String s, char t){
 		int[] answer = new int[s.length()];
