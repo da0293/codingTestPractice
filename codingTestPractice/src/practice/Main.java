@@ -2,26 +2,22 @@ package practice;
 
 import java.util.Scanner;
 public class Main {
-	public int[] solution(String s, char t){
-		int[] answer = new int[s.length()];
-		int p = 1000; 
-		for( int i=0; i<s.length(); i++) {
-			if ( s.charAt(i)== t ) {
-				p = 0; 
-				answer[i] = p;  
-			} else {
-				p++; 
-				answer[i] = p; 
+	public String solution(String str){
+		String answer = "" ;
+		int cnt = 1; 
+		System.out.println("more");
+		for( int i = 0; i < str.length()-1; i++) {
+			if (str.charAt(i) == str.charAt(i+1)) {
+				System.out.println("첫번째 " + String.valueOf(str.charAt(i)));
+				System.out.println(String.valueOf(str.charAt(i+1)));
+				cnt++; 
+			}else {
+				answer += String.valueOf(str.charAt(i));
+				if (cnt!=1)answer+=cnt; 
+				cnt=1; 
 			}
 		}
-		p = 1000; 
-		for( int i = s.length()-1; i >=0; i-- ) {
-			if ( s.charAt(i)== t ) p = 0; 
-			else {
-				p++;
-				answer[i]= Math.min(answer[i], p); 
-			}
-		}
+		
 		return answer;
 	}
 	
@@ -29,9 +25,6 @@ public class Main {
 		Main T = new Main();
 		Scanner sc = new Scanner(System.in);
 		String str = sc.next();
-		char c = sc.next().charAt(0); // 
-		for( int x: T.solution(str, c)) { //
-			System.out.print(x + " ");
-		}
+		System.out.println(T.solution(str));
 	}
 }
