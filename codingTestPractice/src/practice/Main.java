@@ -3,10 +3,20 @@ package practice;
 import java.util.Scanner;
 public class Main {
 	public String solution(String str){
-		String answer = ""; 
-		for( int i = 0; i < str.length(); i++ ) {
-			if(str.indexOf(str.charAt(i))== i) answer += str.charAt(i); 
+		String answer = "YES"; 
+		str = str.toUpperCase();
+		int lt = 0; 
+		int rt = str.length()-1; 
+		while(lt<rt) {
+			if(str.charAt(lt) == str.charAt(rt)) {
+				lt++; 
+				rt--; 
+			}else {
+				answer = "NO";
+				break; 
+			}
 		}
+		
 		return answer; 
 	}
 	
