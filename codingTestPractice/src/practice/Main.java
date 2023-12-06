@@ -1,16 +1,13 @@
 package practice;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
-	public String solution(String str){
-		String answer = ""; 
-		String[] s = str.split(" ");
-		int min = Integer.MIN_VALUE;
-		for( String x : s) {
-			if ( x.length() > min) {
-				min = x.length();
-				answer = x; 
-			}
+	public ArrayList<String> solution(String[] s){
+		ArrayList<String> answer =  new ArrayList<>(); 
+		for ( String x : s ) {
+			x = new StringBuffer(x).reverse().toString();
+			answer.add(x); 
 		}
 		return answer; 
 	}
@@ -18,7 +15,13 @@ public class Main {
 	public static void main(String[] args) {
 		Main T = new Main();
 		Scanner sc = new Scanner(System.in);
-		String str =  sc.nextLine();
-		System.out.println(T.solution(str));
+		int n = sc.nextInt();
+		String[] s = new String[n]; 
+		for ( int i=0; i<n; i++ ) {
+			s[i] =  sc.next();
+		}
+		for ( String answer :  T.solution(s)) {
+			System.out.println(answer);
+		}
 	}
 }
