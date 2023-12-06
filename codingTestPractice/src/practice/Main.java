@@ -1,27 +1,33 @@
 package practice;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
-	public ArrayList<String> solution(String[] s){
-		ArrayList<String> answer =  new ArrayList<>(); 
-		for ( String x : s ) {
-			x = new StringBuffer(x).reverse().toString();
-			answer.add(x); 
+	public String solution(String str){
+		String answer = "";
+		char[] s = str.toCharArray();
+		int lt = 0; 
+		int rt = str.length()-1; 
+		while(lt < rt ) {
+			if(!Character.isAlphabetic(s[lt])) {
+				lt++;
+			} else if (!Character.isAlphabetic(s[rt])) {
+				rt--; 
+			} else {
+				char temp = s[lt]; 
+				s[lt] =  s[rt]; 
+				s[rt] =  temp; 
+				lt++;
+				rt--; 
+			}
 		}
+		answer = String.valueOf(s); 
 		return answer; 
 	}
 	
 	public static void main(String[] args) {
 		Main T = new Main();
 		Scanner sc = new Scanner(System.in);
-		int n = sc.nextInt();
-		String[] s = new String[n]; 
-		for ( int i=0; i<n; i++ ) {
-			s[i] =  sc.next();
-		}
-		for ( String answer :  T.solution(s)) {
-			System.out.println(answer);
-		}
+		String s = sc.next();
+		System.out.println(T.solution(s));
 	}
 }
