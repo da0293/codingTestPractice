@@ -5,19 +5,20 @@ public class Main {
 	public String solution(String str){
 		String answer = "" ;
 		int cnt = 1; 
-		System.out.println("more");
 		for( int i = 0; i < str.length()-1; i++) {
+			// 현재문자와 다음 문자가 같을 경우 1증가
 			if (str.charAt(i) == str.charAt(i+1)) {
-				System.out.println("첫번째 " + String.valueOf(str.charAt(i)));
-				System.out.println(String.valueOf(str.charAt(i+1)));
 				cnt++; 
-			}else {
-				answer += String.valueOf(str.charAt(i));
-				if (cnt!=1)answer+=cnt; 
-				cnt=1; 
+			} else {
+				// 현재 문자와 다음 문자가 다를 경우 answer에 추가 
+				answer += str.charAt(i);
+				if( cnt > 1 ) answer += cnt; 
+				cnt = 1; 
 			}
 		}
-		
+		// 마지막 문자 
+		answer += str.charAt(str.length()-1);
+		if( cnt > 1 ) answer+=cnt;
 		return answer;
 	}
 	
