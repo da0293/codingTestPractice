@@ -2,19 +2,28 @@ package practice;
 
 import java.util.Scanner;
 public class Main {
-	public int solution(String str){
-		String temp  = ""; 
-		for( int i = 0; i < str.length(); i++ ) {
-			if(Character.isDigit(str.charAt(i))) temp += str.charAt(i);
+	public String solution(String str){
+		String answer = ""; 
+		char[] c =  str.toCharArray();
+		int cnt = 1; 
+		for( int i = 0; i < str.length()-1; i++ ) {
+			if (c[i] == c[i+1]) cnt++;
+			else {
+				answer += c[i]; 
+				if( cnt > 1 ) answer += cnt; 
+				cnt = 1; 
+			}
 		}
-		int answer = Integer.parseInt(temp);
+		answer += c[str.length()-1];  
+		if( cnt > 1) answer+= cnt; 
 		return answer; 
 	}
 	
 	public static void main(String[] args) {
 		Main T = new Main();
 		Scanner sc = new Scanner(System.in);
-		String s = sc.next();
-		System.out.println(T.solution(s));
+		String str = sc.next();
+		System.out.println(T.solution(str));
+
 	}
 }
