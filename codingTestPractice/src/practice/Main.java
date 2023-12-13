@@ -3,14 +3,12 @@ package practice;
 import java.util.Scanner;
 public class Main {
 	public int solution(int n, int[] numArray){
-		int answer = n; 
-		for( int y = 1; y < numArray.length; y++) {
-			for( int x = 0 ; x < y; x++) {
-				if(numArray[y] <= numArray[x]) {
-					answer--; 
-					break; 
-
-				}
+		int answer = 1;  
+		int max = numArray[0]; 
+		for( int i = 0; i < numArray.length; i++) {
+			if( numArray[i] > max) {
+				answer++; 
+				max = numArray[i]; 
 			}
 		}
 		return answer; 
