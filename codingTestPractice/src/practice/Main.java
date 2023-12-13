@@ -1,14 +1,16 @@
 package practice;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
-	public ArrayList<Integer> solution(int n, int[] numArray){
-		ArrayList<Integer> answer = new ArrayList<>(); 
-		answer.add(numArray[0]); 
-		for( int i = 1; i < n; i++ ) {
-			if(numArray[i-1] < numArray[i]) {
-				answer.add(numArray[i]); 
+	public int solution(int n, int[] numArray){
+		int answer = n; 
+		for( int y = 1; y < numArray.length; y++) {
+			for( int x = 0 ; x < y; x++) {
+				if(numArray[y] <= numArray[x]) {
+					answer--; 
+					break; 
+
+				}
 			}
 		}
 		return answer; 
@@ -22,9 +24,6 @@ public class Main {
 		for(int i = 0; i < n; i++) {
 			numArray[i] = sc.nextInt();
 		}
-
-		for(int answer : T.solution(n,numArray)){
-			System.out.print(answer +" ");
-		}
+		System.out.println(T.solution(n,numArray));
 	}
 }
