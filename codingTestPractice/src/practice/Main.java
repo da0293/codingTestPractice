@@ -3,28 +3,40 @@ package practice;
 import java.util.Scanner;
 
 public class Main {
-	public int[] solution(int n, int []arr){
-		int[] answer = new int[n];
-		for( int i=0; i<arr.length; i++) {
-			int rank=1; 
-			for( int j=0; j< arr.length; j++) {
-				if( arr[i] < arr[j]) rank++; 
+	public int solution(int n, int[][] arr){
+		int answer = 0;
+		int temp=0; 
+		int sum1, sum2; 
+		for( int y=0; y<n; y++ ) {
+			sum1=0; sum2=0; 
+			for( int x=0; x<n; x++) {
+				sum1+=arr[y][x]; 
+				sum2+=arr[x][y]; 
 			}
-			answer[i]=rank; 
+			temp=Math.max(sum1,sum2); 
+			if(temp>answer)answer=temp; 
 		}
+		sum1=0; sum2=0; 
+		temp=0; 
+		for( int i=0; i<n; i++ ) {
+			sum1+=arr[i][i]; 
+			sum2+=arr[n-1-i][i]; 
+		}
+		temp=Math.max(sum1, sum2); 
+		if(temp>answer)answer=temp; 
 		return answer;
 	}
-	
+
 	public static void main(String[] args) {
 		Main T = new Main();
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
-		int arr[] = new int[n];
-		for( int i=0; i< n; i++) {
-			arr[i] = sc.nextInt();
+		int[][] arr = new int[n][n];
+		for( int y=0; y<n; y++ ) {
+			for( int x=0; x<n; x++ ) {
+				arr[y][x]=sc.nextInt();
+			}
 		}
-		for( int x : T.solution(n, arr) ) {
-			System.out.print( x + " ");
-		}
+		System.out.println(T.solution(n, arr));
 	}
 }
