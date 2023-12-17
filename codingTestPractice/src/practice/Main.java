@@ -3,15 +3,14 @@ package practice;
 import java.util.Scanner;
 
 public class Main {
-	public int solution(int n, int []arr){
-		int answer=0;
-		int cnt=0; 
+	public int[] solution(int n, int []arr){
+		int[] answer = new int[n];
 		for( int i=0; i<arr.length; i++) {
-			if( arr[i]==1) cnt++; 
-			else {
-				cnt=0; 
+			int rank=1; 
+			for( int j=0; j< arr.length; j++) {
+				if( arr[i] < arr[j]) rank++; 
 			}
-			answer+=cnt; 
+			answer[i]=rank; 
 		}
 		return answer;
 	}
@@ -24,6 +23,8 @@ public class Main {
 		for( int i=0; i< n; i++) {
 			arr[i] = sc.nextInt();
 		}
-		System.out.print(T.solution(n, arr));
+		for( int x : T.solution(n, arr) ) {
+			System.out.print( x + " ");
+		}
 	}
 }
