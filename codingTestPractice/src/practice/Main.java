@@ -3,33 +3,27 @@ package practice;
 import java.util.Scanner;
 
 public class Main {
+	int[] dx= { -1, 0, 1, 0 };
+	int[] dy= { 0, 1, 0, -1 };
     public int solution(int n, int[][] arr) {
         int answer = 0;
-        
-        int[] rowSum = new int[n]; 
-        int[] colSum = new int[n]; 
-        int diagonalSum1=0, diagonalSum2=0; 
-        
-        for( int y=0; y<n; y++) {
-        	for( int x=0; x<n; x++) {
-        		rowSum[y]+=arr[y][x];
-        		colSum[x]+=arr[x][y]; 
-        		
-        		if(y==x) {
-        			diagonalSum1+=arr[y][x];
-        			diagonalSum2+=arr[y][n-1-x];
+        for(int y=0; y<n; y++) {
+        	for(int x=0; x<n; x++) {
+        		boolean flag=true; 
+        		for( int k=0; k<4; k++) {
+        			// 해당 좌표의 상하좌우 좌표값
+        			int nx=dx[k]+x; 
+        			int ny=dy[k]+y;
+        			// 봉우리가 아닌 것 먼저 구하기
+        			// ArrayIndexOutOfBoundaryError를 방지 하기위해 nx>=0 && nx<n && ny>=0 && ny<n 먼저 설젇
+        			if( nx>=0 && nx<n && ny>=0 && ny<n && arr[ny][nx]>=arr[y][x]) {
+        				flag=false;
+        				break; 
+        			}
         		}
-        	}	
+        		if(flag) answer++; 
+        	}
         }
-        
-        for(int i=0; i<n; i++) {
-        	answer=Math.max(rowSum[i], answer); 
-        	answer=Math.max(colSum[i], answer);
-        }
-        
-        answer=Math.max(diagonalSum1, answer);
-        answer=Math.max(diagonalSum2, answer);
-
         return answer;
     }
 
