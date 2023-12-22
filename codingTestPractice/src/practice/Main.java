@@ -3,23 +3,23 @@ package practice;
 
 import java.util.Scanner;
 
-public class Main {
-	int[] dx = { -1, 0, 1, 0 };
-	int[] dy = { 0, -1, 0, 1 }; 
+public class Main {	
 	public int solution(int n, int[][] arr){
-		int answer = 0;
-		for( int i=0; i<n; i++ ) {
-			for( int j=0; j<n; j++ ) {
-				boolean flag=true; 
-				for( int k=0; k<4; k++) {
-					int ny=i+dy[k]; 
-					int nx=j+dx[k];
-					if( ny >= 0 && ny < n && nx >= 0 && nx < n && arr[ny][nx] >= arr[i][j] ) {
-						flag=false; 
-						break; 
+		int answer=0;
+		int max=Integer.MIN_VALUE;
+		for( int i=1; i<=n; i++ ) {
+			int cnt=0; 
+			for( int j=1; j<=n; j++) {
+				for( int k=1; k<=5; k++) {
+					if( arr[i][k] == arr[j][k]) {
+						cnt++; 
+						break;
 					}
 				}
-				if(flag) answer++; 
+			}
+			if( cnt > max ) {
+				max = cnt; 
+				answer = i; 
 			}
 		}
 		return answer;
@@ -29,9 +29,9 @@ public class Main {
 		Main T = new Main();
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
-		int[][] arr = new int[n][n];
-		for( int i=0; i< n; i++) {
-			for( int j = 0; j<n; j++) {
+		int[][] arr =  new int[n+1][6]; 
+		for( int i=1; i<= n; i++) {
+			for( int j=1; j<6; j++ ) {
 				arr[i][j] = sc.nextInt();
 			}
 		}
