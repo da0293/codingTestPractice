@@ -10,11 +10,15 @@ public class Main {
 		ArrayList<Integer> answer = new ArrayList<>();
 		Arrays.sort(arr); 
 		Arrays.sort(brr);
-		for( int i=0; i<n; i++) {
-			for( int j=0; j<m; j++) {
-				if( arr[i]==brr[j] ) {
-					answer.add(arr[i]);
-				}
+		int p1=0, p2=0; 
+		while(p1<n && p2<m) {
+			if(arr[p1]==brr[p2]) {
+				answer.add(arr[p1++]);
+				p2++; 
+			}else if(arr[p1]<brr[p2]) {
+				p1++; 
+			}else {
+				p2++; 
 			}
 		}
 		return answer;
