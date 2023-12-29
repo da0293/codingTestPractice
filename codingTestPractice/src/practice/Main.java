@@ -5,18 +5,14 @@ import java.util.Scanner;
 
 public class Main {	
 	public int solution(int n, int m, int[] arr){
-		int answer = 0, start=0, sum=0; 
-		for( int i=0; i<n; i++ ) {
-			sum+=arr[i]; 
-			if(sum==m) {
-				answer++;	
-				i=start++; 
-				sum=0; 
-			}
-			else if( sum > m ) {
-				i=start++; 
-				sum=0; 
-			}
+		int answer = 0, sum=0; 
+		int lt=0; 
+		for( int rt=0; rt<n; rt++) {
+			sum+=arr[rt]; 
+			while(sum > m) {
+				sum-=arr[lt++]; 
+			}	
+			if( sum==m ) answer++;
 		}
 		return answer;
 	}
