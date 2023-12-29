@@ -4,15 +4,17 @@ package practice;
 import java.util.Scanner;
 
 public class Main {	
-	public int solution(int n, int m, int[] arr){
-		int answer = 0, sum=0; 
-		int lt=0; 
-		for( int rt=0; rt<n; rt++) {
-			sum+=arr[rt]; 
-			while(sum > m) {
-				sum-=arr[lt++]; 
-			}	
-			if( sum==m ) answer++;
+	public int solution(int n){
+		int answer = 0, lt=1, sum=0; 
+		int half;
+		if(n%2==1)half=n/2+1; 
+		else half=n/2; 
+		for( int rt=1; rt<=half; rt++ ) {
+			sum+=rt; 
+			while(sum>n) {
+				sum-=lt++; 
+			}
+			if(sum==n)answer++; 
 		}
 		return answer;
 	}
@@ -20,12 +22,7 @@ public class Main {
 		Main T = new Main();
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
-		int m = sc.nextInt();
-		int[] arr = new int[n]; 
-		for( int i=0; i<n; i++ ) {
-			arr[i] = sc.nextInt();
-		}
-		System.out.println(T.solution(n, m, arr));
+		System.out.println(T.solution(n));
 	}
 }
 
