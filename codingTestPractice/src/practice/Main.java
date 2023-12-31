@@ -7,7 +7,6 @@ public class Main {
 	public int solution(int n, int k, int[] arr){
 		int answer = 0, zeroCnt=0;
 		int lt=0;
-		int maxLen=0; 
 		for( int rt=0; rt<n; rt++) {
 			if(arr[rt]==0) zeroCnt++; 
 			while(zeroCnt>k) {
@@ -16,7 +15,7 @@ public class Main {
 				}
 				lt++; 
 			}
-			maxLen = Math.max(maxLen, rt - lt + 1);
+			answer = Math.max(answer, rt-lt+1);
 		}
 		
 		return answer;
