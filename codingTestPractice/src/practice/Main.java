@@ -1,41 +1,32 @@
 package practice;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.Scanner;
 
 public class Main {	
-	public ArrayList<Integer> solution(int n, int m, int[] arr, int[] brr){
-		ArrayList<Integer> answer = new ArrayList<>();
-		Arrays.sort(arr);
-		Arrays.sort(brr);
-		int p1=0, p2=0; 
-		while(p1<n && p2<m) {
-			if(arr[p1] < brr[p2]) {
-				answer.add(arr[p1++]);
-			} else answer.add(brr[p2++]); 
+	public int solution(int n, int k, int[] arr){
+		int answer=0, sum=0, lt=0; ; 
+		for( int i=0; i<k; i++) {
+			sum+=arr[i]; 
 		}
-		while(p1<n) answer.add(arr[p1++]);
-		while(p2<m) answer.add(brr[p2++]);
+		answer = Math.max(answer, sum);
+		for( int rt=k; rt<n; rt++) {
+			sum+=(arr[rt]-arr[lt++]); 
+			answer = Math.max(answer, sum);
+		}
 		return answer;
 	}
 	public static void main(String[] args) {
 		Main T = new Main();
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
+		int k = sc.nextInt();
 		int[] arr = new int[n]; 
 		for( int i=0; i<n; i++ ) {
 			arr[i] = sc.nextInt();
 		}
-		int m = sc.nextInt();
-		int[] brr = new int[m];
-		for( int i=0; i<m; i++ ) {
-			brr[i] = sc.nextInt();
-		}
-		for( int x: T.solution(n, m, arr, brr)) {
-			System.out.print( x + " ");
-		}
+		System.out.println(T.solution(n, k, arr));
 	}
 }
 
