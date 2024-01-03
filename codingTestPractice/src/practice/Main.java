@@ -6,16 +6,12 @@ import java.util.Scanner;
 
 public class Main {	
 	public int solution(int n){
-		int answer=0, sum=0, lt=0; 
-		int m = n/2+1;
-		int[] a= new int[m];
-		for(int i=0; i<m; i++) a[i]=i+1; // 자연수니까 i+1함 
-		for( int rt=0; rt<m; rt++ ) {
-			sum+=a[rt]; 
-			while(sum>n) {
-				sum-=a[lt++];
-			}
-			if(sum==n)answer++;
+		int answer=0, cnt=1;
+		n--; 
+		while(n>0) {
+			cnt++;
+			n-=cnt;
+			if(n%cnt==0)answer++; 
 		}
 		return answer;
 	}
