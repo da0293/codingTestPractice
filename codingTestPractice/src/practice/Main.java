@@ -2,18 +2,27 @@ package practice;
 
 
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {	
-	public int solution(int n, int k, int[] arr){
-		int answer=0, cnt=0, lt=0;
-		for(int rt=0; rt<n; rt++) {
-			if(arr[rt]==0) cnt++; 
-			while(cnt>k) {
-				if( arr[lt]==0 ) cnt--; 
-				lt++; 
+	public char solution(int n, String s){
+		char answer= ' ';
+		int max = Integer.MIN_VALUE;
+		HashMap<Character, Integer> map = new HashMap<>();
+		for( char x: s.toCharArray()) {
+			if(map.containsKey(x)) {
+				map.put(x, map.get(x)+1);
+			} else {
+				map.put(x, 1); 
 			}
-			answer = Math.max(answer, rt-lt+1);
+		}
+		for( char key : map.keySet()) {
+			int cnt = map.get(key);
+			if(cnt>max) {
+				max=cnt; 
+				answer = key; 
+			}
 		}
 		return answer;
 	}
@@ -21,12 +30,8 @@ public class Main {
 		Main T = new Main();
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
-		int k = sc.nextInt();
-		int[] arr = new int[n]; 
-		for( int i=0; i<n; i++ ) {
-			arr[i] = sc.nextInt();
-		}
-		System.out.println(T.solution(n, k, arr));
+		String s = sc.next(); 
+		System.out.println(T.solution(n, s));
 	}
 }
 
