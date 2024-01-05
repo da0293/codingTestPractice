@@ -6,30 +6,43 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {	
-	public String solution(String s1, String s2){
-		String answer = "YES";
-		HashMap<Character, Integer> map = new HashMap<>();
-		for( char c1 : s1.toCharArray()) {
-			if(map.containsKey(c1)) {
-				map.put(c1, map.put(c1, map.get(c1)+1));
-			} else {
-				map.put(c1, 1);
-			}
+	public int solution(String s, String t){
+		int answer=0; 
+		int sLen = s.length();
+		int tLen = t.length();
+		HashMap<Character, Integer> targetMap = new HashMap<>();
+		HashMap<Character, Integer> windowMap= new HashMap<>();
+		
+		// 타겟 해시맵
+		for( int i=0; i<tLen; i++ ){
+			if(targetMap.containsKey(t.charAt(i))) targetMap.put(t.charAt(i), targetMap.get(t.charAt(i)+1));
+			else targetMap.put(t.charAt(i), 1);
 		}
-		for( char c2 : s2.toCharArray()) {
-			if(!map.containsKey(c2) || map.get(c2)==0) answer="NO";
-			if(map.containsKey(c2)) {
-				map.put(c2, map.put(c2, map.get(c2)-1));
-			}
+		
+		// 초기 윈도우 창
+		for( int i=0; i<tLen; i++) {
+			if(windowMap.containsKey(s.charAt(i))) windowMap.put(s.charAt(i), windowMap.get(s.charAt(i)+1));
+			else windowMap.put(s.charAt(i), 1);
 		}
-		return answer;
+		
+		// 타겟 맵과 초기윈도우가 같으면 answer++;
+		if(targetMap.equals(windowMap)) answer++; 
+		
+		// 윈도우맵과 타겟맵 비교
+		int lt=0; 
+		for( int rt=tLen; rt<sLen; rt++ ) {
+
+			
+		}
+		
+		return answer; 
 	}
 	public static void main(String[] args) {
 		Main T = new Main();
 		Scanner sc = new Scanner(System.in);
-		String s1 = sc.next();
-		String s2 = sc.next();
-		System.out.println(T.solution(s1, s2));
+		String s = sc.next();
+		String t = sc.next();
+		System.out.println(T.solution(s,t));
 	}
 }
 
