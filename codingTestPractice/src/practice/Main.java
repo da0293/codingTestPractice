@@ -23,20 +23,19 @@ public class Main {
 		}
 		// 큐가 비어있기 직전까지 while문
 		while(!q.isEmpty()) {
+			// 63
 			Patient current = q.poll(); 
 			boolean canTreat = true; 
-			for(int i=0; i<q.size(); i++) {
-				Patient compare = q.poll(); 
+			for(Patient compare : q) {
 				if(current.priority < compare.priority) {
-					q.add(current); 
+					q.add(current);
 					canTreat = false;
-				}else {
-					q.add(compare); 
+					break; 
 				}
 			}
-			if(canTreat) {
+			if(canTreat==true) {
 				answer++; 
-				if(m==current.priority) return answer; 
+				if(m==current.id)return answer; 
 			}
 		}
 		return answer; 
