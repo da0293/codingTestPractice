@@ -1,50 +1,32 @@
 package practice;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
-class Patient {
-	int id; 
-	int priority;
-	public Patient(int id, int priority) {
-		this.id = id; 
-		this.priority = priority; 
-	}
-}
+
 public class Main {	
 	
-	public int solution(int n, int m, int[] list) {
-		int answer = 0; 
-		Queue<Patient> Q = new LinkedList<>(); 
-		for( int i=0; i<n; i++ ) {
-			Q.offer(new Patient(i, list[i])); 
-		}
-		while(!Q.isEmpty()) {
-			Patient a = Q.poll(); 
-			boolean canTreat = true; 
-			for(Patient b : Q) {
-				if(a.priority < b.priority) {
-					Q.add(a); 
-					canTreat=false;
-					break; 
-				}
+	public int[] solution(int n, int[] arr) {
+		for( int i=0; i<n-1; i++) {
+			int idx=i;
+			for( int j=i+1; j<n; j++) {
+				if(arr[j]<arr[idx]) idx=j;
 			}
-			if(canTreat) {
-				answer++; 
-				if(m==a.id) return answer; 
-			}
+			int tmp=arr[i];
+			arr[i]=arr[idx];
+			arr[idx]=tmp;
 		}
-		return answer; 
+		return arr;
+	
 	}
 	public static void main(String[] args) {
 		Main T = new Main();
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
-		int m = sc.nextInt();
-		int[] list = new int[n]; 
+		int[] arr = new int[n]; 
 		for( int i=0; i<n; i++ ) {
-			list[i] = sc.nextInt();
+			arr[i] = sc.nextInt();
 		}
-		System.out.print(T.solution(n, m, list));
+		for(int x : T.solution(n,arr)) {
+			System.out.print(x + " ");
+		}
 	}
 }
