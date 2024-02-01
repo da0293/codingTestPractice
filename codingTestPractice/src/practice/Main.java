@@ -1,41 +1,30 @@
 package practice;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {	
 	
-	public int[] solution(int size, int n, int[] arr) {
-		int[] cache = new int[size];
-		for( int x :  arr) {
-			int pos=-1; 
-			for( int i=0; i<size-1; i++) {
-				if(x==cache[i]) pos=i;
+	public String solution(int n, int[] arr) {
+		String answer="U";
+		Arrays.sort(arr);
+		for( int i=0; i<n-1; i++ ) {
+			if(arr[i]==arr[i+1]) {
+				return "D";
 			}
-			if(pos==-1) {
-				for(int i=size-1; i>=1; i--) {
-					cache[i]=cache[i-1];
-				}
-			} else {
-				for(int i=pos; i>=1; i--) {
-					cache[i]=cache[i-1];
-				}
-			}
-			cache[0]=x;
 		}
-		return cache;
-	
+		
+		return answer;
 	}
 	public static void main(String[] args) {
 		Main T = new Main();
 		Scanner sc = new Scanner(System.in);
-		int size = sc.nextInt();
 		int n = sc.nextInt();
 		int[] arr = new int[n]; 
 		for( int i=0; i<n; i++ ) {
 			arr[i] = sc.nextInt();
 		}
-		for(int x : T.solution(size,n,arr)) {
-			System.out.print(x + " ");
-		}
+		System.out.println(T.solution(n, arr));
 	}
 }
