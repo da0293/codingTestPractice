@@ -23,6 +23,8 @@ public class Main {
 		for( int i=0; i<n; i++ ) {
 			arr[i] = sc.nextInt();
 		}
-		System.out.println(T.solution(n, arr));
+		for( int x : T.solution(0, arr)) {
+			System.out.println(x + " ");
+		}
 	}
 }
