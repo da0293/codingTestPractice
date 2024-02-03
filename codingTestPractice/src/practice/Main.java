@@ -1,19 +1,22 @@
 package practice;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {	
 	
-	public ArrayList<Integer> solution(int n, int[] arr) {
-		ArrayList<Integer> answer = new ArrayList<>();
-		int[] tmp=arr.clone();
-		Arrays.sort(tmp);
-		for( int i=0; i<n; i++ ) {
-			if(arr[i]!=tmp[i]) answer.add(i+1);
-		}//*
-		return answer;
+	public int[] solution(int n, int[] arr) {
+		for( int i=0; i<n-1; i++) {
+			int idx = i; 
+			for( int j=i+1; j<n; j++) {
+				if(arr[j]<arr[idx]){
+					idx=j; 
+				}
+			}
+			int temp = arr[i];
+			arr[i] = arr[idx];
+			arr[idx] = temp;
+		}
+		return arr;
 	}
 	public static void main(String[] args) {
 		Main T = new Main();
@@ -23,8 +26,8 @@ public class Main {
 		for( int i=0; i<n; i++ ) {
 			arr[i] = sc.nextInt();
 		}
-		for( int x : T.solution(0, arr)) {
-			System.out.println(x + " ");
+		for( int x : T.solution(n, arr)) {
+			System.out.print(x + " ");
 		}
 	}
 }
