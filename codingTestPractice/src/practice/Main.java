@@ -5,14 +5,17 @@ import java.util.Scanner;
 public class Main {	
 	
 	public int[] solution(int n, int[] arr) {
+		// 최소값 인덱스를 바꿔치기 
 		for( int i=0; i<n-1; i++) {
-			for( int j=0; j<n-i-1; j++ ) {
-				if(arr[j]>arr[j+1]) {
-					int temp = arr[j]; 
-					arr[j] = arr[j+1];
-					arr[j+1] = temp;
+			int idx=i; 
+			for( int j=i+1; j<n; j++) {
+				if(arr[idx]>arr[j]) {
+					idx=j; 
 				}
 			}
+			int temp = arr[idx]; 
+			arr[idx] = arr[i];
+			arr[i]=temp;
 		}
 		return arr;
 	}
