@@ -4,34 +4,29 @@ import java.util.Scanner;
 
 public class Main {	
 	
-	public int[] solution(int size, int n, int[] arr) {
-		int[] cache =new int[size];
-		for( int x  : arr ) {
-			int targetIdx=-1; 
-			for( int i=0; i<size; i++ ) if(cache[i]==x) targetIdx=i; 
-			if(targetIdx==-1) {
-				for(int i=size-1; i>=1; i--) {
-					cache[i] = cache[i-1]; 
-				}
-			} else {
-				for(int i=targetIdx; i>=1; i--) {
-					cache[i] = cache[i-1]; 
+	public int[] solution(int n, int[] arr) {
+		for(int i=0; i<n-1; i++ ) {
+			int idx=i;
+			for(int j=i+1; j<n; j++) {
+				if(arr[idx]>arr[j]) {
+					idx=j; 
 				}
 			}
-			cache[0]=x; 
+			int temp = arr[i];
+			arr[i] = arr[idx];
+			arr[idx] = temp;
 		}
-		return cache;
+		return arr;
 	}
 	public static void main(String[] args) {
 		Main T = new Main();
 		Scanner sc = new Scanner(System.in);
-		int s = sc.nextInt();
 		int n = sc.nextInt();
 		int[] arr = new int[n]; 
 		for( int i=0; i<n; i++ ) {
 			arr[i] = sc.nextInt();
 		}
-		for( int x : T.solution(s, n, arr)) {
+		for( int x : T.solution(n, arr)) {
 			System.out.print(x + " ");
 		}
 	}
