@@ -6,22 +6,19 @@ public class Main {
 	
 	public int[] solution(int size, int n, int[] arr) {
 		int[] cache =new int[size];
-		for(int x : arr) {
-			int pos=-1; 
-			for(int i=0; i<size; i++) {
-				if(x==cache[i])pos=i; 
-			}
-			if(pos==-1) {
+		for( int x  : arr ) {
+			int targetIdx=-1; 
+			for( int i=0; i<size; i++ ) if(cache[i]==x) targetIdx=i; 
+			if(targetIdx==-1) {
 				for(int i=size-1; i>=1; i--) {
-					cache[i]=cache[i-1];
+					cache[i] = cache[i-1]; 
 				}
-				cache[0]=x; 
-			}else {
-				for(int i=pos; i>=1; i--) {
-					cache[i]=cache[i-1];
+			} else {
+				for(int i=targetIdx; i>=1; i--) {
+					cache[i] = cache[i-1]; 
 				}
-				cache[0]=x; 
 			}
+			cache[0]=x; 
 		}
 		return cache;
 	}
