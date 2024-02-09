@@ -3,16 +3,18 @@ package practice;
 import java.util.Scanner;
 
 public class Main {	
-	
 	public int[] solution(int n, int[] arr) {
-		for(int i=0; i<n-1; i++ ) {
-			for( int j=0; j<n-1-i; j++) {
-				if(arr[j]>arr[j+1]) {
-					int temp = arr[j];
-					arr[j] = arr[j+1];
-					arr[j+1] = temp;
+		// 선택정렬은 최소값 인덱스값을 변수에 저장함
+		for( int i=0; i<n-1; i++ ) {
+			int minIdx = i; 
+			for( int j=i+1; j<n; j++ ) {
+				if(arr[minIdx] > arr[j]) {
+					minIdx=j; 
 				}
 			}
+			int temp = arr[i];
+			arr[i] = arr[minIdx];
+			arr[minIdx] = temp;
 		}
 		return arr;
 	}
