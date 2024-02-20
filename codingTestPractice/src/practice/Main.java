@@ -1,24 +1,21 @@
 package practice;
 
-
+import java.util.Scanner;
 
 public class Main {	
 	/*
-	 * n이 0이되면 return하여 함수종료
-	 * DFS(11) 15라인 -> DFS(5) 15라인 -> DFS(2) 15라인 -> DFS(1) 15라인  -> DFS(0) 13라인
-	 * 
-	 * 
+	 * D(5) 5*DFS(4)를 리턴받음 -> D(4) 4*DFS(3)을 리턴받음
+	 * -> D(3) 3*DFS(2)를 리턴받음 -> D(2) 2*DFS(1)을 리턴받음 -> 1 리턴받고 pop
 	 */
-	public void DFS(int n) {
-		if(n==0) return; 
-		else {
-			DFS(n/2); 
-			System.out.print(n%2+ " ");
-		}
+	public int DFS(int n) {
+		if(n==1) return 1; 
+		else return n*DFS(n-1); 
 	}
 
 	public static void main(String[] args) {
 		Main T = new Main();
-		T.DFS(11);
+		Scanner sc = new Scanner(System.in); 
+		int n = sc.nextInt();
+		System.out.println(T.DFS(n));
 	}
 }
