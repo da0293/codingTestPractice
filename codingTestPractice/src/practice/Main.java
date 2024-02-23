@@ -1,26 +1,50 @@
 package practice;
 
-import java.util.Scanner;
+// 이진 트리의 노드 
+class Node{
+	int data; 
+	Node lt, rt; // Node 객체 주소 저장 
+	public Node(int val){
+		data=val; 
+		lt=rt=null; 
+	}
+}
 
 public class Main {	
-	static int[] fibo; 
-	public int DFS(int n) {
-		// 이미구한 값
-		if(fibo[n]>0) return fibo[n]; 
-		if(n==1) return 1; 
-		else if(n==2) return 1; 
+	Node root; 
+	public void DFS(Node root) {
+		if(root==null) return; // 말단 Node로 온 경우
 		else {
-			return fibo[n]=DFS(n-2)+DFS(n-1); 
+			// 전위순회
+			System.out.print(root.data + " ");
+			DFS(root.lt);
+			DFS(root.rt); 
 		}
+		/*
+		 * 중위순회
+			else {
+				DFS(root.lt);
+				System.out.print(root.data + " ");
+				DFS(root.rt); 
+			}
+			후위순회
+			else {
+				DFS(root.lt);
+				DFS(root.rt); 
+				System.out.print(root.data + " ");
+			}
+		*/
 	}
-
+	// 이진 트리 생성, DFS 수행
 	public static void main(String[] args) {
-		Main T = new Main();
-		Scanner sc = new Scanner(System.in); 
-		int n = sc.nextInt();
-		fibo = new int[n+1]; 
-		for( int i=1; i<=n; i++ ) {
-			System.out.print(T.DFS(i) + " ");
-		}
+		Main tree = new Main();
+		tree.root=new Node(1); 
+		tree.root.lt=new Node(2); 
+		tree.root.rt=new Node(3); 
+		tree.root.lt.lt=new Node(4); 
+		tree.root.lt.rt=new Node(5); 
+		tree.root.rt.lt=new Node(6); 
+		tree.root.rt.rt=new Node(7); 
+		tree.DFS(tree.root);
 	}
 }
