@@ -25,6 +25,7 @@ public class Main {
 		Main T = new Main();
 		Scanner sc = new Scanner(System.in);
 		n = sc.nextInt();
+		ch = new int[n+1]; 
 		T.DFS(1);
 	}
 }
