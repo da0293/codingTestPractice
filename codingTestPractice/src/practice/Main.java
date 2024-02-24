@@ -1,42 +1,48 @@
 package practice;
 
-import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.Queue;
+
+class Node{
+	int data;
+	Node lt, rt; 
+	public Node(int val) {
+		data=val; 
+		lt=rt=null; 
+	}
+}
 
 public class Main {	
-	static int n; 
-	static int[] ch; 
-	public void DFS(int L) {
-		if(L==n+1) {
-			// 모든 원소를 선택한 경우
-			String tmp=""; 
-			for(int i=1; i<=n; i++) {
-				if(ch[i]==1) tmp+=(i+ " ");
-			}
-			// 공집합 제외
-			if(tmp.length()>0) System.out.println(tmp);
-		}else {
-			// 현재 위치의 원소를 선택한 경우
-			ch[L]=1; 
-			// 다음 위치로 이동하여 재귀적으로 탐색
-			System.out.println("L  : " + L + " : " + 1);
-			DFS(L+1); 
-			System.out.println("L : " + L + " : 1에서 돌아옴");
-			// 현재 위치의 원소를 선택하지 않은 경우
-			ch[L]=0; 
-			System.out.println("L : " + L + " : " + 0);
-			// 다음 위치로 이동하여 재귀적으로 탐색
-			DFS(L+1); 
-			System.out.println("L : " + L + " : 0에서 돌아옴");
+	Node root; 
+	public void BFS(Node root) {
+		Queue<Node> Q = new LinkedList<>();
+		Q.offer(root); 
+		int Level = 0; 
+		while(!Q.isEmpty()) {
+			int len=Q.size();
+			System.out.print(Level+ " : ");
+			for( int i=0; i<len; i++ ) {
+				Node current = Q.poll();
+				System.out.print(current.data + " ");
+				// 왼쪽 자식이 있다면
+				if(current.lt!=null) Q.offer(current.lt); 
+				// 오른쪽 자식이 있다면
+				if(current.rt!=null) Q.offer(current.rt); 			
+				}
+				Level++; 
+				System.out.println();
 		}
 	}
-	// 이진 트리 생성, DFS 수행
+	
 	public static void main(String[] args) {
-		Main T = new Main();
-		Scanner sc = new Scanner(System.in);
-		// 자연수 N을 입력받음
-		n = sc.nextInt();
-		// 선택한 원소를 표시하는 배열 초기화
-		ch = new int[n+1]; 
-		T.DFS(1);
+		Main tree = new Main();
+		tree.root = new Node(1); 
+		tree.root.lt = new Node(2); 
+		tree.root.rt = new Node(3);
+		tree.root.lt.lt = new Node(4); 
+		tree.root.lt.rt = new Node(5);
+		tree.root.rt.lt = new Node(6); 
+		tree.root.rt.rt = new Node(7); 
+		tree.BFS(tree.root);
 	}
 }
