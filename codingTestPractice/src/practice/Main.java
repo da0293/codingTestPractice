@@ -2,47 +2,51 @@ package practice;
 
 import java.util.LinkedList;
 import java.util.Queue;
-
-class Node{
-	int data;
-	Node lt, rt; 
-	public Node(int val) {
-		data=val; 
-		lt=rt=null; 
-	}
-}
+import java.util.Scanner;
 
 public class Main {	
-	Node root; 
-	public void BFS(Node root) {
-		Queue<Node> Q = new LinkedList<>();
-		Q.offer(root); 
-		int Level = 0; 
+	// 최소 횟수 카운트
+	int answer=0; 
+	// 전진 1칸, 후진 1칸, 전진 5칸 
+	int[] dis= {1, -1, 5}; 
+	// 체크배열, 한번 방문한것은 큐에 넣지않겠다 
+	static int[] ch; 
+	// 갈 수 있는 위치를 저장할 Q 
+	Queue<Integer> Q = new LinkedList<>();
+	public int BFS(int s, int e) {
+		ch=new int[10001]; 
+		// 출발지점 체크
+		ch[s]=1; 
+		Q.offer(s); 
+		// level은 점프횟수와 같다. 
+		int lev=0; 
 		while(!Q.isEmpty()) {
 			int len=Q.size();
-			System.out.print(Level+ " : ");
-			for( int i=0; i<len; i++ ) {
-				Node current = Q.poll();
-				System.out.print(current.data + " ");
-				// 왼쪽 자식이 있다면
-				if(current.lt!=null) Q.offer(current.lt); 
-				// 오른쪽 자식이 있다면
-				if(current.rt!=null) Q.offer(current.rt); 			
+			for(int i=0; i<len; i++) {
+				int x=Q.poll();
+				if(x==e) return 1; 
+				for(int j=0; j<3; j++) {
+					int nx=x+=dis[j]; 
+					if(nx>=1 && nx<=10000 && ch[nx]==0) {
+						ch[nx]=1; 
+						Q.offer(nx); 
+					}
 				}
-				Level++; 
-				System.out.println();
+			}
+			lev++; 
 		}
+		return 0; 
 	}
-	
 	public static void main(String[] args) {
-		Main tree = new Main();
-		tree.root = new Node(1); 
-		tree.root.lt = new Node(2); 
-		tree.root.rt = new Node(3);
-		tree.root.lt.lt = new Node(4); 
-		tree.root.lt.rt = new Node(5);
-		tree.root.rt.lt = new Node(6); 
-		tree.root.rt.rt = new Node(7); 
-		tree.BFS(tree.root);
+		Main T = new Main();
+		Scanner sc = new Scanner(System.in);
+		// 현재 위치(현수의 위치)
+		int s=sc.nextInt();
+		// 송아지 위치
+		int e=sc.nextInt();
+		ch=new int[10001]; 
+		// 출발지점 체크
+		ch[s]=1; 
+		System.out.println(T.BFS(s,e));
 	}
 }
