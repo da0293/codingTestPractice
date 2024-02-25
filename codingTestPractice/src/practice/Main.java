@@ -24,9 +24,9 @@ public class Main {
 			int len=Q.size();
 			for(int i=0; i<len; i++) {
 				int x=Q.poll();
-				if(x==e) return 1; 
+				if(x==e) return lev; 
 				for(int j=0; j<3; j++) {
-					int nx=x+=dis[j]; 
+					int nx=x+dis[j]; 
 					if(nx>=1 && nx<=10000 && ch[nx]==0) {
 						ch[nx]=1; 
 						Q.offer(nx); 
@@ -46,7 +46,6 @@ public class Main {
 		int e=sc.nextInt();
 		ch=new int[10001]; 
 		// 출발지점 체크
-		ch[s]=1; 
 		System.out.println(T.BFS(s,e));
 	}
 }
