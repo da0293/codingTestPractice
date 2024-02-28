@@ -1,6 +1,7 @@
 package practice;
 
 import java.util.LinkedList;
+import java.util.Queue;
 
 class Node{
 	int data;
@@ -13,9 +14,21 @@ class Node{
 
 public class Main {	
 	Node root;
-	public int DFS(int lev, Node root) {
-		if(root.lt==null && root.rt==null) return lev;
-		else return Math.min(DFS(lev+1, root.lt), DFS(lev+1, root.rt)); 
+	public int BFS(Node root) {
+		Queue<Node> Q = new LinkedList<>();
+		Q.offer(root); 
+		int L=0; 
+		while(!Q.isEmpty()) {
+			int len=Q.size();
+			for( int i=0; i<len; i++ ) {
+				Node current = Q.poll();
+				if(current.lt==null && current.rt==null) return L; 
+				if(current.lt!=null) Q.offer(current.lt); 
+				if(current.rt!=null) Q.offer(current.rt); 
+			}
+			L++; 
+		}
+		return 0; 
 	}
 	public static void main(String[] args) {
 		Main t = new Main();
@@ -24,6 +37,6 @@ public class Main {
 		t.root.rt=new Node(3);
 		t.root.lt.lt=new Node(4);
 		t.root.lt.rt=new Node(5); 
-		System.out.println(t.DFS(0, t.root));
+		System.out.println(t.BFS(t.root));
 	}
 }
