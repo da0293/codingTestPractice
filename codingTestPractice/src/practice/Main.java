@@ -7,45 +7,32 @@ import java.util.Scanner;
 
 
 public class Main {	
-	static int n,m, answer=0; 
-	static ArrayList<ArrayList<Integer>> graph; 
-	static int[] ch, dis; 
-	public void BFS(int v) {
-		Queue<Integer> queue = new LinkedList<>();
-		ch[v]=1; 
-		dis[v]=0;
-		queue.offer(v);
-		while(!queue.isEmpty()) {
-			int cv=queue.poll();
-			for(int nv : graph.get(cv)) {
-				if(ch[nv]==0) {
-					ch[nv]=1; 
-					queue.offer(nv); 
-					dis[nv]=dis[cv]+1; 
-					
-				}
+	static String answer="NO"; 
+	static int n, total=0; 
+	boolean flag=false; 
+	public void DFS(int L, int sum, int[] arr) {
+		if(flag) return; 
+		if(sum>total/2) return; 
+		if(L==n) {
+			if((total-sum)==sum) {
+				answer="YES"; 
+				flag=true; 
 			}
+		}else {
+			DFS(L+1, sum+arr[L], arr); 
+			DFS(L+1, sum, arr); 
 		}
 	}
 	public static void main(String[] args) {
 		Main t = new Main();
 		Scanner sc = new Scanner(System.in); 
 		n=sc.nextInt();
-		m=sc.nextInt();
-		graph=new ArrayList<ArrayList<Integer>>();
-		for(int i=0; i<=n; i++) {
-			graph.add(new ArrayList<Integer>());
+		int arr[] =  new int[n]; 
+		for(int i=0 ;i<n; i++) {
+			arr[i]=sc.nextInt();
+			total+=arr[i]; 
 		}
-		ch=new int[n+1]; 
-		dis=new int[n+1]; 
-		for( int i=0; i<m; i++ ) {
-			int a=sc.nextInt();
-			int b=sc.nextInt();
-			graph.get(a).add(b); 
-		}
-		t.BFS(1);
-		for(int i=2; i<=n; i++) {
-			System.out.println(i+" : "+dis[i]);
-		}
+		t.DFS(0, 0, arr); 
+		System.out.println(answer);
 	}
 }
