@@ -4,16 +4,15 @@ import java.util.Scanner;
 
 
 public class Main {	
-	static int[] pm;
-	static int n, m;
-	public void DFS(int L) { 
-		if(L==m) {
-			for(int x: pm)System.out.print(x+" ");
-			System.out.println();
+	static int n, m, answer=Integer.MAX_VALUE; 
+	public void DFS(int L, int sum, int[] arr ) { 
+		if(sum>m)return; 
+		if(L>=answer)return; 
+		if(sum==m) {
+			answer=Math.min(answer, L);
 		}else {
-			for(int i=1; i<=n; i++) {
-				pm[L]=i; 
-				DFS(L+1); 
+			for(int i=0; i<n; i++) {
+				DFS(L+1, sum+arr[i], arr); 
 			}
 		}
 	}
@@ -21,8 +20,12 @@ public class Main {
 		Main T = new Main();
 		Scanner sc = new Scanner(System.in); 
 		n=sc.nextInt();
+		int[] arr=new int[n];
+		for( int i=0; i<n; i++ ) {
+			arr[i] = sc.nextInt();
+		}
 		m=sc.nextInt();
-		pm=new int[m]; 
-		T.DFS(0);
+		T.DFS(0, 0, arr);
+		System.out.println(answer);
 	}
 }
