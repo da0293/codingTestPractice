@@ -2,16 +2,13 @@ package practice;
 
 
 public class Main {	
-	public void DFS(int n) {
-		if(n==0)return; 
-		else {
-			DFS(n/2); 
-			System.out.print(n%2 + " ");
-		}
+	public int DFS(int n) {
+		if(n==1) return 1; 
+		else return n*DFS(n-1); 
 	}
 
 	public static void main(String[] args) {
 		Main T = new Main();
-		T.DFS(11); 
+		System.out.println(T.DFS(5));
 	}
 }
