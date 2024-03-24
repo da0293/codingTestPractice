@@ -2,17 +2,31 @@ package practice;
 
 import java.util.Scanner;
 
-
 public class Main {
- 
-	public int DFS(int n) {
-		if(n==1)return 1; 
-		else return n*DFS(n-1); 
+	static int n; 
+	static int[] fibo; 
+	public void DFS(int x) {
+		if(x>n) {
+			String tmp=""; 
+			for(int i=1; i<=n; i++) {
+				if(fibo[i]==1) tmp+=(i+" ");
+			}
+			if(tmp.length()>0) System.out.println(tmp);
+		}
+		else {
+			fibo[x]=1; 
+			DFS(x+1); 
+			fibo[x]=0; 
+			DFS(x+1); 
+		}
+		
+		
 	}
 	public static void main(String[] args) {
 		Main T = new Main();
-		Scanner sc = new Scanner(System.in); 
-		int n = sc.nextInt();
-		System.out.println(T.DFS(n));
+		Scanner sc = new Scanner(System.in);
+		n = sc.nextInt();
+		fibo = new int[n+1]; 
+		T.DFS(1);
 	}
 }
