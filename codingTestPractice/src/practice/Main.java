@@ -4,12 +4,14 @@ import java.util.Scanner;
 
 public class Main {	
 	public void DFS(int n) {
-		System.out.print(n + " ");
-		if(n==1) return; 
-		DFS(n-1); 
+		if(n==0) return; 
+		DFS(n/2);
+		System.out.print(n%2);
 	}
 	public static void main(String[] args) {
 		Main T = new Main();
-		T.DFS(3);
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		T.DFS(n);
 	}
 }
