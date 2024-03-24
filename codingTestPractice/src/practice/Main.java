@@ -2,35 +2,28 @@ package practice;
 
 import java.util.Scanner;
 
-class Node{
-	int data;
-	Node lt; 
-	Node rt;
-	
-	public Node(int n) {
-		data = n; 
-		lt = rt = null; 
-	}
-}
-
 public class Main {
-	Node root; 
-	public void DFS(Node n) {
-		if(n==null)return; 
-		DFS(n.lt); 
-		DFS(n.rt);
-		System.out.print(n.data + " ");
-		
+	static int n; 
+	static int[] ck; 
+	public void DFS(int lev) {
+		if(lev==n+1) {
+			String tmp = ""; 
+			for(int i=1; i<=n; i++) {
+				if(ck[i]==1) tmp+=(i + " "); 
+			}
+			if(tmp.length()>0)System.out.println(tmp);
+		}else {
+			ck[lev]=1;
+			DFS(lev+1); 
+			ck[lev]=0; 
+			DFS(lev+1); 
+		}
 	}
 	public static void main(String[] args) {
-		Main Tree = new Main();
-		Tree.root = new Node(1); 
-		Tree.root.lt = new Node(2); 
-		Tree.root.rt = new Node(3); 
-		Tree.root.lt.lt = new Node(4); 
-		Tree.root.lt.rt = new Node(5); 
-		Tree.root.rt.lt = new Node(6); 
-		Tree.root.rt.rt = new Node(7); 
-		Tree.DFS(Tree.root); 
+		Main T = new Main();
+		Scanner sc = new Scanner(System.in);
+		n = sc.nextInt();
+		ck = new int[n+1]; 
+		T.DFS(1); 
 	}
 }
