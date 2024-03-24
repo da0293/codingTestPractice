@@ -1,32 +1,46 @@
 package practice;
 
-import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.Queue;
 
+class Node{
+	int data;
+	Node lt;
+	Node rt;
+	public Node(int n) {
+		data=n; 
+		lt=rt=null;
+	}
+}
 public class Main {
-	static int n; 
-	static int[] fibo; 
-	public void DFS(int x) {
-		if(x>n) {
-			String tmp=""; 
-			for(int i=1; i<=n; i++) {
-				if(fibo[i]==1) tmp+=(i+" ");
+	Node root; 
+	public void BFS(Node root) {
+		Queue<Node> q = new LinkedList<>(); 
+		q.offer(root);
+		int lev=0;
+		while(!q.isEmpty()) {
+			int len = q.size();
+			System.out.print(lev + ":");
+			for(int i=0; i<len; i++) {
+				Node current=q.poll(); 
+				System.out.print(current.data + " ");
+				if(current.lt!=null) q.offer(current.lt); 
+				if(current.rt!=null) q.offer(current.rt); 
 			}
-			if(tmp.length()>0) System.out.println(tmp);
+			lev++; 
+			System.out.println();
 		}
-		else {
-			fibo[x]=1; 
-			DFS(x+1); 
-			fibo[x]=0; 
-			DFS(x+1); 
-		}
-		
 		
 	}
 	public static void main(String[] args) {
 		Main T = new Main();
-		Scanner sc = new Scanner(System.in);
-		n = sc.nextInt();
-		fibo = new int[n+1]; 
-		T.DFS(1);
+		T.root = new Node(1); 
+		T.root.lt = new Node(2); 
+		T.root.rt = new Node(3); 
+		T.root.lt.lt = new Node(4); 
+		T.root.lt.rt = new Node(5); 
+		T.root.rt.lt = new Node(6); 
+		T.root.rt.rt = new Node(7); 
+		T.BFS(T.root);
 	}
 }
