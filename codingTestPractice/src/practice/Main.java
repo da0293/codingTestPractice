@@ -2,45 +2,52 @@ package practice;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
 
-class Node{
-	int data;
-	Node lt;
-	Node rt;
-	public Node(int n) {
-		data=n; 
-		lt=rt=null;
-	}
-}
+
 public class Main {
-	Node root; 
-	public void BFS(Node root) {
-		Queue<Node> q = new LinkedList<>(); 
-		q.offer(root);
+	int[] dis = {-1,1,5}; 
+	int[] ck; 
+	public int BFS(int s, int e) {
+		ck = new int[10001]; 
+		ck[s] = 1; 
+		Queue<Integer> q = new LinkedList<>();
+		q.offer(s);
 		int lev=0;
 		while(!q.isEmpty()) {
 			int len = q.size();
-			System.out.print(lev + ":");
+			// 해당 레벨 for문 돌기
 			for(int i=0; i<len; i++) {
-				Node current=q.poll(); 
-				System.out.print(current.data + " ");
-				if(current.lt!=null) q.offer(current.lt); 
-				if(current.rt!=null) q.offer(current.rt); 
+				// 큐에서 좌표 꺼냄 
+				int x = q.poll();
+				// 한 좌표당 앞으로 1, 뒤로 -1, 앞으로 5 즉 3가지 경우가 있다. 
+				for(int j=0; j<3; j++) {
+					// 해당좌표에 경우의 수 더함 
+					int nx = x+dis[j]; 
+					// 그 레벨이 거리값과 같다. 그래서 송아지좌표와 같다면 lev 리턴
+					if(nx==e) return lev; 
+					// 좌표의 범위가 1~100000이므로 이것 지킴 
+					// 그리고 해당 좌표(nx)가 아직 방문되지 않았을 때 큐에 추가 
+					if(nx >=1 && nx<=10000 && ck[nx]==0) {
+						ck[nx]=1; 
+						q.offer(nx); 
+					}
+					
+				}
 			}
 			lev++; 
-			System.out.println();
 		}
+		return 0; 
 		
 	}
 	public static void main(String[] args) {
 		Main T = new Main();
-		T.root = new Node(1); 
-		T.root.lt = new Node(2); 
-		T.root.rt = new Node(3); 
-		T.root.lt.lt = new Node(4); 
-		T.root.lt.rt = new Node(5); 
-		T.root.rt.lt = new Node(6); 
-		T.root.rt.rt = new Node(7); 
-		T.BFS(T.root);
+		Scanner sc = new Scanner(System.in); 
+		// 현수 위치
+		int s = sc.nextInt();
+		// 송아지 위치
+		int e = sc.nextInt();
+		System.out.println(T.BFS(s,e));
+		
 	}
 }
