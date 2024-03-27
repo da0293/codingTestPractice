@@ -25,7 +25,7 @@ public class Main {
 					// 해당좌표에 경우의 수 더함 
 					int nx = x+dis[j]; 
 					// 그 레벨이 거리값과 같다. 그래서 송아지좌표와 같다면 lev 리턴
-					if(nx==e) return lev; 
+					if(nx==e) return lev++; 
 					// 좌표의 범위가 1~100000이므로 이것 지킴 
 					// 그리고 해당 좌표(nx)가 아직 방문되지 않았을 때 큐에 추가 
 					if(nx >=1 && nx<=10000 && ck[nx]==0) {
